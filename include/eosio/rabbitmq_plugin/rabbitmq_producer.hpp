@@ -46,7 +46,7 @@ class rabbitmq_producer {
         
         int trx_rabbitmq_init(std::string hostname, uint32_t port, std::string username, std::string password);
         
-        int trx_rabbitmq_assert_exchange(std::string exchane_name);
+        int trx_rabbitmq_assert_exchange(std::string exchane_name, std::string exchange_type);
 
         void trx_rabbitmq_sendmsg(std::string routingKey, std::string exchange, std::string msgstr);
 

@@ -95,13 +95,13 @@ using rabbitmq_producer_ptr = std::shared_ptr<class rabbitmq_producer>;
             
         } catch (fc::exception &e) {
             elog("FC Exception while applied_transaction ${e}", ("e", e.to_string()));
-            app.quit();
+            app().quit();
         } catch (std::exception &e) {
             elog("STD Exception while applied_transaction ${e}", ("e", e.what()));
-            app.quit();
+            app().quit();
         } catch (...) {
             elog("Unknown exception while applied_transaction");
-            app.quit();
+            app().quit();
         }
     }
 
@@ -179,14 +179,14 @@ using rabbitmq_producer_ptr = std::shared_ptr<class rabbitmq_producer>;
 
                 if (0!=my->producer->trx_rabbitmq_init(hostname, port, username, password)){
                     elog("trx_rabbitmq_init fail, killing node");
-                    app.quit();
+                    app().quit();
                 } else{
                     elog("trx_rabbitmq_init ok");
                 }
 
                 if (0!=my->producer->trx_rabbitmq_assert_exchange(my->m_applied_trx_exchange, my->m_applied_trx_exchange_type)){
                     elog("trx_rabbitmq_init fail, killing node");
-                    app.quit();
+                    app().quit();
                 } else{
                     elog("trx_rabbitmq_init ok");
                 }
@@ -207,7 +207,7 @@ using rabbitmq_producer_ptr = std::shared_ptr<class rabbitmq_producer>;
             } else {
                 wlog( "eosio::rabbitmq_plugin configured, but no --rabbitmq-hostname specified." );
                 wlog( "rabbitmq_plugin disabled. killing eos node." );
-                app.quit();
+                app().quit();
             }
         }
         FC_LOG_AND_RETHROW()
