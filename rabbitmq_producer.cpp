@@ -111,7 +111,7 @@ int rabbitmq_producer::trx_rabbitmq_assert_exchange(std::string exchane_name, st
                         0,
                         amqp_empty_table );
 
-  EOS_ASSERT( !status, rabbitmq_plugin_assert_exchange, "failed asserting exchange");
+  // EOS_ASSERT( !status, rabbitmq_plugin_assert_exchange, "failed asserting exchange");
   return 0;
 }
 
