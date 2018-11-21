@@ -122,12 +122,12 @@ void rabbitmq_producer::trx_rabbitmq_sendmsg(std::string routingKey, std::string
   props.delivery_mode = 2; /* persistent delivery mode */
   
 
-  auto status = amqp_basic_publish(conn, 1, amqp_cstring_bytes(exchange.c_str()),
+  int res = amqp_basic_publish(conn, 1, amqp_cstring_bytes(exchange.c_str()),
                                   amqp_cstring_bytes(routingKey.c_str()), 0, 0,
                                   &props, amqp_cstring_bytes(msgstr.c_str()));
 
   // dlog("sending message ${e}", ("e", exchange));
-  EOS_ASSERT( status == 0, rabbitmq_plugin_publish_exception, "failed publish");             
+  die_amqp_error(res, "basic.publish")    
   // dlog("message sent ${m}", ("m", msgstr));
 
 }
