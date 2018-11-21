@@ -127,7 +127,7 @@ void rabbitmq_producer::trx_rabbitmq_sendmsg(std::string routingKey, std::string
                                   &props, amqp_cstring_bytes(msgstr.c_str()));
 
   // dlog("sending message ${e}", ("e", exchange));
-  EOS_ASSERT( res < 0, rabbitmq_plugin_assert_exchange, "failed publishing message");
+  EOS_ASSERT( res == 0, rabbitmq_plugin_assert_exchange, "failed publishing message");
   // dlog("message sent ${m}", ("m", msgstr));
 
 }
